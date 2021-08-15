@@ -7,7 +7,7 @@ import { style } from './style';
 
 const Home = () => {
     const { container, userCard, contentContainerStyle, separator, avatar, infoHolder, cardName, cardEmail, cardBold, cardCountry, cardTime, cardArrow, emptyText, loadMoreIndicator, absoluteView } = style();
-    const { list, error, loading, loadMore, isRefreshing, onEndReached, refresh } = useHome();
+    const { list, error, loading, loadMore, isRefreshing, onEndReached, refresh, navigate } = useHome();
 
     const renderItem = ({ item }) => {
         const createdAt = new Date(item?.registered.date);
@@ -16,12 +16,12 @@ const Home = () => {
             diffDays === 1 ? `Yesterday, ${format(createdAt, 'HH:mm a')}` :
                 diffDays === 2 ? `${diffDays} days ago` : format(createdAt, 'MMMM dd, yyyy');
         return (
-            <TouchableOpacity style={userCard}>
+            <TouchableOpacity style={userCard} onPress={() => navigate("Profile", { item: { ...item, registerationFormattedDate } })}>
                 <Image source={{ uri: item.picture.thumbnail }} style={avatar} />
                 <View style={infoHolder}>
                     <Text style={cardName}>{`${item.name.first} ${item.name.last}`}</Text>
                     <Text style={cardEmail}>{item.email}</Text>
-                    <Text style={cardBold}>Country <Text style={cardCountry}>{item.location.city}</Text></Text>
+                    <Text style={cardBold}>Country <Text style={cardCountry}>{item.location.country}</Text></Text>
                 </View>
                 <View style={absoluteView}>
                     <Text style={cardTime}>{registerationFormattedDate}</Text>
@@ -41,11 +41,11 @@ const Home = () => {
         );
     }
 
-    const renderFooter = () => loadMore && <ActivityIndicator style={loadMoreIndicator} />
+    const renderFooter = () => loadMore && <ActivityIndicator style={loadMoreIndicator} color="#000" />
 
     return (
         <View style={container}>
-            {loading ? <ActivityIndicator /> :
+            {loading ? <ActivityIndicator color="#000" /> :
                 <FlatList
                     data={list}
                     renderItem={renderItem}

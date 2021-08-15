@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchUsers } from 'src/redux/features/home.feature';
 
 export const useHome = () => {
-    const { setOptions } = useNavigation();
+    const { setOptions, navigate } = useNavigation();
     const dispatch = useDispatch();
     const [page, setPage] = useState(1);
     const screenOptions = {
@@ -34,5 +34,5 @@ export const useHome = () => {
         dispatch(fetchUsers({ page }));
     }, []);
 
-    return { list, error, loading, loadMore, isRefreshing, refresh, onEndReached };
+    return { list, error, loading, loadMore, isRefreshing, refresh, onEndReached, navigate };
 }

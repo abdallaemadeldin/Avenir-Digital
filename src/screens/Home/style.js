@@ -46,6 +46,7 @@ export const style = () => {
             fontSize: 14,
             color: "#000",
             fontWeight: 'bold',
+            textAlign: 'left'
         },
         cardEmail: {
             fontSize: 12,

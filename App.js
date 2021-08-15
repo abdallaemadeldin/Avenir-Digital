@@ -17,7 +17,7 @@ const App = () => {
   useEffect(() => { I18nManager.allowRTL(false); }, []);
   return (
     <Provider store={store}>
-      <StatusBar backgroundColor="#fff" barStyle="dark-content" animated />
+      <StatusBar backgroundColor="#f1f1f1" barStyle="dark-content" animated />
       <WindowStack />
     </Provider>
   );
